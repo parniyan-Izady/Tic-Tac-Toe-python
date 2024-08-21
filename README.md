@@ -8,7 +8,7 @@
     <h1>Tic-Tac-Toe Game - CS50 python Final Project</h1>
     <h2>Project Overview</h2>
     <p>
-        This project is a Python-based implementation of the classic game "Tic-Tac-Toe." It was developed as the final project for the CS50x course offered by Harvard University. The game is designed to be played on a 4x4 grid, adding an extra layer of complexity compared to the traditional 3x3 version. The game offers two modes: single-player (against the computer) and two-player (against another human).
+        This project is a Python-based implementation of the classic game "Tic-Tac-Toe." It was developed as the final project for the CS50p course offered by Harvard University. The game is designed to be played on a 4x4 grid, adding an extra layer of complexity compared to the traditional 3x3 version. The game offers two modes: single-player (against the computer) and two-player (against another human).
     </p>
     <h2>Features</h2>
     <h3>1. Main Menu</h3>
