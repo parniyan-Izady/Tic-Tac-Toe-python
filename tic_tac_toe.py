@@ -3,44 +3,47 @@ import random
 def main():
     # Main game loop that continues until the user chooses to exit
     while True:
+        re_flag = 1
         display_main_menu()
-        try:
-            choice = int(input("Enter your choice (1-3): "))
-            if choice == 1:
-                # Loop for single-player mode
+        choice = int(input("Enter your choice (1-3): "))
+        if choice == 1:
+            # Loop for single-player mode
+            while re_flag != 0:
+                board = list(range(16))
+                lock_random_positions(board)
+                play_single_player(board)
+                display_game_menu()
                 while True:
-                    board = list(range(16))
-                    lock_random_positions(board)
-                    play_single_player(board)
-                    display_game_menu()
                     option = int(input("Enter your choice (1-2): "))
                     if option == 1:
+                        re_flag = 0
                         break  # Return to the main menu
                     elif option == 2:
-                        continue  # Restart the game
+                        break
                     else:
                         print("Invalid choice! Please enter 1 or 2.")
-            elif choice == 2:
-                # Loop for two-player mode
+        elif choice == 2:
+            # Loop for two-player mode
+            while re_flag != 0:
+                board = list(range(16))
+                lock_random_positions(board)
+                play_two_players(board)
+                display_game_menu()
                 while True:
-                    board = list(range(16))
-                    lock_random_positions(board)
-                    play_two_players(board)
-                    display_game_menu()
                     option = int(input("Enter your choice (1-2): "))
                     if option == 1:
+                        re_flag = 0
                         break  # Return to the main menu
                     elif option == 2:
-                        continue  # Restart the game
+                        break
                     else:
                         print("Invalid choice! Please enter 1 or 2.")
-            elif choice == 3:
-                print("Exiting the game. Goodbye!")
-                break  # Exit the game loop
-            else:
-                print("Invalid choice! Please enter a number between 1 and 3.")
-        except ValueError:
-            print("Invalid input! Please enter a valid number.")
+        elif choice == 3:
+            print("Exiting the game. Goodbye!")
+            break  # Exit the game loop
+        else:
+            print("Invalid choice! Please enter a number between 1 and 3.")
+
 
 def display_main_menu():
     # Display the main menu with options for the game
@@ -148,10 +151,37 @@ def check_winner(board, message, symbol, turn_count):
 
 def display_board(board):
     # Display the current state of the board
+    print("+---------------------------------------+")
+    print("|                 BOARD                 |")
     print("-----------------------------------------", end=" ")
     for y in range(16):
         if y % 4 == 0:
             print()
             print("|   ", end=" ")
         if board[y] not in ['#', 'o', 'x']:
-   
+            if y < 9:
+                print(f"0{y + 1}   |   ", end=" ")
+            else:
+                print(f"{y + 1}   |   ", end=" ")
+        else:
+            print(f"{board[y]}    |   ", end=" ")
+        if y % 4 == 3:
+            print()
+            print("-----------------------------------------", end=" ")
+    print()
+
+
+# Handle player's move
+def player_move(board, prompt, symbol):
+    while True:
+        print(prompt)
+        index = int(input())
+        print()
+        index -= 1
+        if 0 <= index <= 15 and board[index] not in ['#', 'x', 'o']:
+            board[index] = symbol
+            break
+        print("Invalid number!")
+
+
+main()
